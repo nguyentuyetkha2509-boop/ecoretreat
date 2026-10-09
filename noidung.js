@@ -188,5 +188,25 @@ window.NOIDUNG = {
     ["2020", "Nhà phát triển dự án khu phức hợp tốt nhất Việt Nam, PropertyGuru Vietnam Property Awards"],
     ["2020", "Doanh nghiệp xây dựng cộng đồng cư dân tốt nhất, PropertyGuru Vietnam Property Awards"]
   ],
+  ecoparkHYTieuDe: "Hình ảnh thực tế của dự án Ecopark Hưng Yên",
+  // Ảnh đầu tiên hiện to ở trên, các ảnh sau xếp thành cột. Mỗi dòng: [mô tả, đường dẫn, rộng, cao]
+  ecoparkHY: [
+    ["Hoàng hôn trên khu đô thị Ecopark Hưng Yên", "anh/ecopark-hy-13.webp", 1600, 1066],
+    ["Hồ nước và hàng dừa nhìn từ trên cao, có người chèo thuyền kayak", "anh/ecopark-hy-11.webp", 900, 1200],
+    ["Đàn cò bay trên rặng dừa ven hồ", "anh/ecopark-hy-01.webp", 900, 600],
+    ["Nắng sớm xuyên qua tán cây", "anh/ecopark-hy-04.webp", 900, 1200],
+    ["Quảng trường về đêm nhìn từ trên cao", "anh/ecopark-hy-09.webp", 900, 600],
+    ["Cò đậu trên cành tre giữa hồ", "anh/ecopark-hy-12.webp", 900, 600],
+    ["Người mặc áo dài giữa khu vườn xanh", "anh/ecopark-hy-03.webp", 900, 1350],
+    ["Đường ven bãi cỏ dưới bóng cây", "anh/ecopark-hy-02.webp", 900, 675],
+    ["Hoàng hôn phía sau hai tòa tháp cao tầng", "anh/ecopark-hy-08.webp", 900, 1350],
+    ["Con đường rợp bóng cây trong nắng sớm", "anh/ecopark-hy-05.webp", 900, 1215],
+    ["Thiên nga bơi giữa hồ", "anh/ecopark-hy-07.webp", 900, 1200],
+    ["Lối đi giữa hàng cây dương xỉ", "anh/ecopark-hy-10.webp", 900, 1200],
+    ["Cò trắng dang cánh trên tán dừa", "anh/ecopark-hy-14.webp", 900, 1350],
+    ["Đàn cò bay trong rừng cây", "anh/ecopark-hy-06.webp", 900, 600]
+  ],
+  // Cách chia cột cho 13 ảnh sau ảnh đầu (số là thứ tự ảnh, bắt đầu từ 0), tính sẵn để các cột cao bằng nhau. 2 cột cho điện thoại, 3 cột cho máy tính.
+  ecoparkHYCot: { 2: [[0, 1, 2, 8, 9, 10], [3, 4, 5, 6, 7, 11, 12]], 3: [[0, 1, 3, 4, 5], [2, 6, 7, 9], [8, 10, 11, 12]] },
   chuDauTuAnh: "anh/chu-dau-tu.webp"
 };

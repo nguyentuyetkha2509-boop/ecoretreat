@@ -114,7 +114,9 @@ td:last-child{text-align:right}table.tdl td:last-child{text-align:left}
 .tabbar button:hover{background:#eaf6dc}.tabbar button:focus-visible{outline:3px solid var(--vang);outline-offset:2px}
 .tabbar button.sel{background:var(--xanh);color:#fff}
 body.sub .strip,body.sub #gioithieu,body.sub #banner,body.sub #videoanh{display:none}
-.tabarea{display:none;padding:0}body.sub .tabarea{display:block}
+.tabarea{display:block;padding:0}
+body:not(.sub) .tabsec{display:block;padding:44px 0 48px}
+body:not(.sub) .tabsec:nth-child(even){background:#fff!important}
 nav a.sel{border-bottom:3px solid #fff;padding-bottom:4px}
 .tabsec{display:none;background:transparent!important;padding:34px 0 40px}.tabsec.on{display:block}
 @media(max-width:700px){.tabbar{flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;scrollbar-width:none;padding-bottom:6px;margin:0}.tabbar::-webkit-scrollbar{display:none}.tabbar button{font-size:.88rem;padding:11px 15px}}
@@ -139,6 +141,23 @@ nav a.sel{border-bottom:3px solid #fff;padding-bottom:4px}
 .rieng{margin:0;text-align:center;font-size:.85rem;color:#cfe9bd}
 .goi{position:fixed;right:14px;bottom:14px;z-index:20;display:none}
 .goi.zalo{bottom:68px;background:#0068ff;color:#fff}
+
+.hy-hero{display:block;width:100%;height:auto;border-radius:12px;box-shadow:0 2px 10px #0002;margin:0 0 12px}
+.hy{display:flex;gap:12px;align-items:flex-start}.hy .c{flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:12px}.hy a{display:block}.hy img{display:block;width:100%;height:auto;border-radius:10px;box-shadow:0 2px 8px #0002}
+.mo-lop{position:fixed;inset:0;z-index:60;background:#000a;display:none;align-items:flex-start;justify-content:center;overflow-y:auto;padding:4vh 14px}
+.mo-lop.on{display:flex}
+.mo-hop{position:relative;width:100%;max-width:760px;background:#fffaf2;border:14px solid #4fa51a;margin:auto 0;padding:26px 24px 28px;box-shadow:0 10px 40px #0006}
+.mo-dong{position:absolute;right:-14px;top:-14px;width:44px;height:44px;border:0;background:#e8211b;color:#fff;font-size:1.6rem;line-height:1;cursor:pointer}
+.mo-hop h2{font-size:clamp(1.25rem,4.6vw,1.8rem);margin:0 0 16px;color:#1b1b1b}
+.mo-ck{display:flex;flex-wrap:wrap;gap:10px 28px;margin:0 0 16px;justify-content:center}
+.mo-ck label{display:flex;align-items:center;gap:8px;font-size:1.05rem;cursor:pointer}.mo-ck input{width:20px;height:20px;accent-color:var(--xanh)}
+.mo-hop form{display:grid;grid-template-columns:1fr 1fr;gap:12px;position:relative}
+.mo-hop form input[type=text],.mo-hop form input[type=tel],.mo-hop form input[type=email],.mo-hop form textarea{font:inherit;font-size:1rem;width:100%;box-sizing:border-box;padding:14px;border:1.5px solid #333;border-radius:2px;background:#fff;color:#1b1b1b}
+.mo-hop form .r2{grid-column:1/3}
+.mo-hop form .btn{grid-column:1/3;justify-self:center;background:#f26a1b;color:#fff;text-transform:uppercase;padding:14px 34px}
+.mo-hop .rieng{grid-column:1/3;color:#6b6659}
+.mo-hop .ok{background:#e9f6dc}
+@media(max-width:600px){.mo-hop form{grid-template-columns:1fr}.mo-hop form .r2,.mo-hop form .btn,.mo-hop .rieng{grid-column:1}.mo-hop{padding:22px 16px 24px;border-width:10px}.mo-dong{right:-10px;top:-10px}}
 </style>
 </head>
 <body>
@@ -171,6 +190,7 @@ nav a.sel{border-bottom:3px solid #fff;padding-bottom:4px}
   <p id="cdtMoTa" style="text-align:center;max-width:680px;margin:0 auto 20px"></p>
   <img class="hinh" id="cdtAnh" alt="Các dự án nổi bật của chủ đầu tư" loading="lazy">
   <h3 style="text-align:center;color:var(--xanh);margin:24px 0 8px">Giải thưởng</h3><table id="bangGT"></table>
+  <h3 class="tlh sec2" id="hyTieuDe"></h3><div id="hyHero"></div><div class="hy" id="hyLuoi"></div>
   </div></section>
 
 <section class="nen" id="vitri"><div class="wrap"><h2>Vị trí và kết nối</h2><img class="hinh" style="max-width:1100px" src="anh/vi-tri.webp" alt="Vị trí dự án" loading="lazy"><table id="bangvt"></table><p class="ghichu" id="vtGhiChu"></p></div></section>
@@ -213,6 +233,22 @@ nav a.sel{border-bottom:3px solid #fff;padding-bottom:4px}
 <a class="btn goi zalo" id="nutZalo" href="#" target="_blank" rel="noopener">Zalo</a>
 <a class="btn goi" id="nutGoi" href="#">Gọi ngay</a>
 
+<div class="mo-lop" id="moLop" role="dialog" aria-modal="true" aria-labelledby="moTieuDe" aria-hidden="true"><div class="mo-hop">
+  <button class="mo-dong" id="moDong" type="button" aria-label="Đóng">&times;</button>
+  <h2 id="moTieuDe">Đăng ký tư vấn chi tiết</h2>
+  <form id="moForm">
+    <div class="mo-ck r2"><label><input type="checkbox" name="ck" value="Nhận thông tin, giá bán"> Nhận thông tin, giá bán</label><label><input type="checkbox" name="ck" value="Tham quan dự án, nhà mẫu"> Tham quan dự án, nhà mẫu</label></div>
+    <input class="r2" type="text" name="ten" placeholder="Họ và tên *" required autocomplete="name">
+    <input type="tel" name="sdt" placeholder="Số điện thoại *" required pattern="[0-9 +.]{9,14}" autocomplete="tel">
+    <input type="email" name="email" placeholder="Địa chỉ email" autocomplete="email">
+    <textarea class="r2" name="loinhan" rows="2" placeholder="Lời nhắn cho chúng tôi"></textarea>
+    <input name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+    <button class="btn" type="submit">Đăng ký tư vấn ngay</button>
+    <p class="rieng">Thông tin của bạn chỉ được dùng để liên hệ tư vấn về dự án.</p>
+  </form>
+  <div class="ok" id="moOk">Cảm ơn anh/chị đã đăng ký. Chúng tôi sẽ liên hệ sớm nhất.</div>
+</div></div>
+
 <template id="mauForm">
   <h2>Đăng ký nhận tư vấn</h2>
   <p>Để lại thông tin, chuyên viên sẽ liên hệ lại với anh/chị.</p>
@@ -247,6 +283,15 @@ $('tqAnh').innerHTML=(N.tongQuanAnh||[]).map(function(u,i){return '<a href="'+es
 if(N.video&&N.video.id){$('videoBox').innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+encodeURIComponent(N.video.id)+'" title="'+esc(N.video.tieuDe)+'" loading="lazy" allowfullscreen></iframe>'}
 $('thucLuoi').innerHTML=(N.thucTe||[]).map(function(x,i){return '<figure><a href="'+esc(x[1])+'" target="_blank" rel="noopener"><img src="'+esc(x[1])+'" alt="'+esc(x[0]||'Hình ảnh thực tế dự án '+(i+1))+'" loading="lazy"></a>'+(x[0]?'<figcaption>'+esc(x[0])+'</figcaption>':'')+'</figure>'}).join('');$('ttGhiChu').textContent=N.thucTeGhiChu||'';
 $('bangGT').innerHTML=bang(N.giaiThuong||[]);
+(function(){var a=N.ecoparkHY||[];if(!a.length){var t=$('hyTieuDe');if(t)t.style.display='none';return}
+$('hyTieuDe').textContent=N.ecoparkHYTieuDe||'';
+var im=function(x,c,l){return '<img'+(c?' class="'+c+'"':'')+' src="'+esc(x[1])+'" alt="'+esc(x[0])+'" width="'+x[2]+'" height="'+x[3]+'"'+(l?' loading="lazy"':'')+'>'};
+var f=a[0];$('hyHero').innerHTML='<a href="'+esc(f[1])+'" target="_blank" rel="noopener">'+im(f,'hy-hero',false)+'</a>';
+var rest=a.slice(1),mq=window.matchMedia('(min-width:900px)'),cot=N.ecoparkHYCot||{};
+function ve(){var k=mq.matches?3:2,g=cot[k];if(!g){g=[];for(var c=0;c<k;c++)g.push([]);rest.forEach(function(x,i){g[i%k].push(i)})}
+$('hyLuoi').innerHTML=g.map(function(col){return '<div class="c">'+col.map(function(i){var x=rest[i];return '<a href="'+esc(x[1])+'" target="_blank" rel="noopener">'+im(x,'',true)+'</a>'}).join('')+'</div>'}).join('')}
+ve();if(mq.addEventListener)mq.addEventListener('change',ve);else if(mq.addListener)mq.addListener(ve);
+})();
 $('cdtMoTa').textContent=N.chuDauTuMoTa||'';$('cdtAnh').src=N.chuDauTuAnh;
 $('vtGhiChu').textContent=N.viTriGhiChu||'';
 function tl(a){return a.map(function(r){var cur=/đang mở bán/i.test(r[1]);return '<li'+(cur?' class="cur"':'')+'><span class="d">'+esc(r[0])+'</span><span class="t">'+esc(r[1])+'</span></li>'}).join('')}
@@ -279,6 +324,15 @@ var zl=(N.zalo||N.soDienThoai||'').replace(/[^0-9]/g,'');if(zl){var z=$('nutZalo
 var nav=document.querySelector('nav'),mb=$('menuBtn');
 mb.addEventListener('click',function(){var o=nav.classList.toggle('mo');mb.setAttribute('aria-expanded',o);mb.innerHTML=o?'&#10005;':'&#9776;'});
 nav.addEventListener('click',function(e){if(e.target.tagName==='A'){nav.classList.remove('mo');mb.innerHTML='&#9776;'}});
+function guiLead(v){
+  var ep=(N.formEndpoint||'').trim();if(!ep)return Promise.resolve();
+  var q=new URLSearchParams(location.search),d=new URLSearchParams();
+  d.set('ten',(v.ten||'').trim());d.set('sdt',(v.sdt||'').trim());d.set('email',(v.email||'').trim());d.set('loai',v.loai||'');
+  d.set('website',v.website||'');d.set('trang',location.origin+location.pathname+location.hash);
+  ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(function(u){d.set(u,q.get(u)||'')});
+  return fetch(ep,{method:'POST',mode:'no-cors',body:d});
+}
+function dayLead(){try{window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:'lead_submit'})}catch(x){}}
 var mau=$('mauForm');
 document.querySelectorAll('.khuform').forEach(function(k){
   k.appendChild(mau.content.cloneNode(true));
@@ -289,16 +343,30 @@ document.querySelectorAll('.khuform').forEach(function(k){
     e.preventDefault();
     var btn=f.querySelector('button[type=submit]'),ok=k.querySelector('.ok');
     function xong(){f.style.display='none';ok.style.display='block';try{window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:'lead_submit'})}catch(x){}}
-    var ep=(N.formEndpoint||'').trim();
-    if(!ep){xong();return}
-    var q=new URLSearchParams(location.search),d=new URLSearchParams();
-    d.set('ten',f.ten.value.trim());d.set('sdt',f.sdt.value.trim());d.set('email',(f.email.value||'').trim());d.set('loai',f.loai.value);
-    d.set('website',f.website?f.website.value:'');d.set('trang',location.origin+location.pathname+location.hash);
-    ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(function(u){d.set(u,q.get(u)||'')});
+    if(!(N.formEndpoint||'').trim()){xong();return}
     btn.disabled=true;var goc=btn.textContent;btn.textContent='Đang gửi...';
-    fetch(ep,{method:'POST',mode:'no-cors',body:d}).then(xong).catch(function(){btn.disabled=false;btn.textContent=goc;alert('Chưa gửi được. Bạn vui lòng thử lại hoặc gọi trực tiếp.')});
+    guiLead({ten:f.ten.value,sdt:f.sdt.value,email:f.email.value,loai:f.loai.value,website:f.website?f.website.value:''}).then(xong).catch(function(){btn.disabled=false;btn.textContent=goc;alert('Chưa gửi được. Bạn vui lòng thử lại hoặc gọi trực tiếp.')});
   });
 });
+
+(function(){
+  var lop=$('moLop'),f=$('moForm'),ok=$('moOk'),truoc=null;
+  function mo(){truoc=document.activeElement;f.style.display='';ok.style.display='none';lop.classList.add('on');lop.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';setTimeout(function(){f.ten.focus()},50)}
+  function dong(){lop.classList.remove('on');lop.setAttribute('aria-hidden','true');document.body.style.overflow='';if(truoc&&truoc.focus)truoc.focus()}
+  document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href="#lienhe"]');if(a){e.preventDefault();mo()}},true);
+  $('moDong').addEventListener('click',dong);
+  lop.addEventListener('click',function(e){if(e.target===lop)dong()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&lop.classList.contains('on'))dong()});
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var btn=f.querySelector('button[type=submit]'),goc=btn.textContent;
+    var ck=[].slice.call(f.querySelectorAll('input[name=ck]:checked')).map(function(c){return c.value}).join('; ');
+    var ln=f.loinhan.value.trim();
+    var loai=ck+(ln?(ck?' | ':'')+'Lời nhắn: '+ln:'');
+    btn.disabled=true;btn.textContent='Đang gửi...';
+    guiLead({ten:f.ten.value,sdt:f.sdt.value,email:f.email.value,loai:loai,website:f.website.value}).then(function(){f.reset();f.style.display='none';ok.style.display='block';btn.disabled=false;btn.textContent=goc;dayLead()}).catch(function(){btn.disabled=false;btn.textContent=goc;alert('Chưa gửi được. Bạn vui lòng thử lại hoặc gọi trực tiếp.')});
+  });
+})();
 </script>
 </body>
 </html>
