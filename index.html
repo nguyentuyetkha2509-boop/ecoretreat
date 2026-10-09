@@ -311,6 +311,7 @@ function go(id){if(id===cur)return;try{if(id)history.pushState(null,'','#'+id);e
 var alias={uudai:'sanpham',thucte:'tiendo'};function fromHash(){var k=location.hash.slice(1);if(!k)return '';k=alias[k]||k;return ok[k]?k:null}
 window.addEventListener('hashchange',function(){var k=fromHash();if(k!==null&&k!==cur)render(k)});window.addEventListener('popstate',function(){var k=fromHash();render(k===null?cur:k)});
 document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href^="#"]');if(!a)return;var k=a.getAttribute('href').slice(1);if(k==='top'){e.preventDefault();go('');return}if(ok[k]){e.preventDefault();go(k)}});
+if(location.hash==='#lienhe'){try{history.replaceState(null,'',location.pathname+location.search)}catch(e){}}
 var k0=fromHash();render(k0===null?'':k0)})();
 (function(){var v=N.tqVanBan;if(v){$('tqVb').innerHTML='<div><h3>'+esc(v.tieuDe)+'</h3>'+v.doan.map(function(d){return '<p>'+esc(d)+'</p>'}).join('')+'</div><img src="'+esc(v.anh)+'" alt="'+esc(v.tieuDe)+'" loading="lazy">'}
 $('tqNb').innerHTML=(N.tqNoiBat||[]).map(function(x){return '<div><img src="'+esc(x[0])+'" alt="'+esc(x[1])+'" loading="lazy"><h4>'+esc(x[1])+'</h4><p>'+esc(x[2])+'</p></div>'}).join('');
@@ -351,9 +352,12 @@ document.querySelectorAll('.khuform').forEach(function(k){
 
 (function(){
   var lop=$('moLop'),f=$('moForm'),ok=$('moOk'),truoc=null;
-  function mo(){truoc=document.activeElement;f.style.display='';ok.style.display='none';lop.classList.add('on');lop.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';setTimeout(function(){f.ten.focus()},50)}
+  function mo(tuDong){truoc=document.activeElement;f.style.display='';ok.style.display='none';lop.classList.add('on');lop.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';if(!tuDong)setTimeout(function(){f.ten.focus()},50)}
   function dong(){lop.classList.remove('on');lop.setAttribute('aria-hidden','true');document.body.style.overflow='';if(truoc&&truoc.focus)truoc.focus()}
   document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href="#lienhe"]');if(a){e.preventDefault();mo()}},true);
+  // Vừa vào trang thì tự hiện form, khách tắt đi thì không hiện lại trong lần xem đó
+  var daHien=false;try{daHien=sessionStorage.getItem('moDa')==='1'}catch(e){}
+  if(!daHien)setTimeout(function(){if(lop.classList.contains('on'))return;try{sessionStorage.setItem('moDa','1')}catch(e){}mo(true)},900);
   $('moDong').addEventListener('click',dong);
   lop.addEventListener('click',function(e){if(e.target===lop)dong()});
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&lop.classList.contains('on'))dong()});
